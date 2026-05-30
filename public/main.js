@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
             algorithm: codeInput.value
         };
 //should be 8082, but for testing use 8081
-        const response = await fetch("http://localhost:8081/run", {
+        const response = await fetch("https://moraysalgovisualzier-335910440161.us-central1.run.app/run", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
