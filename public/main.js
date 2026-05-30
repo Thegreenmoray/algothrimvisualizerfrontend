@@ -1,6 +1,6 @@
 // Global graph state
 console.log("MAIN JS START");
-import Visualfront from "./visualfront.js";
+import Visualfront from "./Visualfront.js";
 
 const edgeLabelToId = new Map();
 const nodeLabelToId = new Map();
