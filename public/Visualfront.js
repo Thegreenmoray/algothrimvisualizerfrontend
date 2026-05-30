@@ -112,7 +112,7 @@ removeNode(node) {
        return colorNode(nodeID,color);
     },
 
-    animateEdge(end,start) {
+    animateEdge(start,end) {
         return animateedge(start,end);
     },
     highlightNodeInstant(nodeID) {

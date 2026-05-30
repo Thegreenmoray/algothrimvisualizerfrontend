@@ -186,8 +186,8 @@ async function playAnimations(anims) {
               await  Visualfront.highlightNode(fs);
                 break;
             case "travelEdge":
-                let fd = nodeLabelToId.get(anim.node);
-                let fg = nodeLabelToId.get(anim.node);
+                let fd = nodeLabelToId.get(anim.from);
+                let fg = nodeLabelToId.get(anim.to);
                 await Visualfront.animateEdge(fd, fg);
                 break;
             case "lightNode":
@@ -400,8 +400,8 @@ document.addEventListener("DOMContentLoaded", () => {
             nodes: Array.from(nodes.values()).map(n => ({ id: n.visual})),
             edges: Array.from(edges.values()).map(e => ({
                 edge:e.visual,
-                from: e.from,
-                to: e.to,
+                from: e.fromlabel,
+                to: e.tolabel,
                 directed: e.directed,
                 weight: e.weight
             })),
@@ -409,8 +409,12 @@ document.addEventListener("DOMContentLoaded", () => {
             matrices: matrices,  // <--- AND THIS
             algorithm: codeInput.value
         };
+
+        console.log(JSON.stringify(payload, null, 2));
 //should be 8082, but for testing use 8081
-        const response = await fetch("https://moraysalgovisualzier-335910440161.us-central1.run.app/run", {
+        const response = await fetch("https://moraysalgovisualzier-335910440161.us-central1.run.app/run"
+            //"http://localhost:8080/run"
+            , {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
