@@ -18,33 +18,33 @@ let freenodeLabels = [];
 let freeedgeLabels = [];
 
 
-export function nextnodeLabel() {
+ function nextnodeLabel() {
     if (freenodeLabels.length > 0) {
         return freenodeLabels.pop();
     }
     return labelnodeid++;
 }
 
-export function deleteNode(node) {
+function deleteNode(node) {
     freenodeLabels.push(node.visual);
 }
 
-export function nextedgeLabel() {
+ function nextedgeLabel() {
     if (freeedgeLabels.length > 0) {
         return freeedgeLabels.pop();
     }
     return labeledgeid++;
 }
 
-export function deleteEdge(edge) {
+ function deleteEdge(edge) {
     freeedgeLabels.push(edge.visual);
 }
 
 
-export function nextid() {
+ function nextid() {
     return nextId++;
 }
-export function init(c, context) {
+ function init(c, context) {
     canvas = c;
     ctx = context;
 }
@@ -176,7 +176,7 @@ establishmatrx(matrix){
 export default Visualfront;
 
 
-export function highlight_node(nodeID) {
+ function highlight_node(nodeID) {
    return  new Promise(resolve => {
         const node = nodePositions.get(nodeID);
         if (!node) return;
@@ -208,7 +208,7 @@ export function highlight_node(nodeID) {
         requestAnimationFrame(animate);})
 }
 
-export function animateedge(start, end){
+function animateedge(start, end){
     return new Promise(resolve => {
         const from = nodePositions.get(start);
         const to = nodePositions.get(end);
@@ -321,7 +321,7 @@ function visualizeGraph(graph) {
     }
 }
 */
-export function make_node_Invisible(nodeID) {
+function make_node_Invisible(nodeID) {
     return new Promise(resolve => {
         const vis = nodePositions.get(nodeID);
         if (!vis ||!vis.visible) return resolve();
@@ -348,7 +348,7 @@ export function make_node_Invisible(nodeID) {
     });
 }
 
-export function make_node_visible(nodeid){
+ function make_node_visible(nodeid){
     return new Promise(resolve => {
         const vis = nodePositions.get(nodeid);
         if (!vis||vis.labelVisible) return resolve();
@@ -363,13 +363,13 @@ export function make_node_visible(nodeid){
     });
 }
 
-export function nodeformation(node){
+ function nodeformation(node){
    // const pos = generateNodePosition();
     nodePositions.set(node.id,node);
        drawAll();
 }
 
-export function edgeformation(edge) {
+ function edgeformation(edge) {
     const from = nodePositions.get(edge.from);
     const to = nodePositions.get(edge.to);
 
@@ -389,7 +389,7 @@ export function edgeformation(edge) {
 
 }
 
-export function establishset(list) {
+ function establishset(list) {
     const id = nextListID++;
 
     const elements = [];
@@ -415,7 +415,7 @@ export function establishset(list) {
     return id;
 }
 
-export function renderList(listId) {
+ function renderList(listId) {
     const list = listpostions.get(listId);
 
 
@@ -442,7 +442,7 @@ export function renderList(listId) {
     }
 }
 
-export function establishmatrix(matrix) {
+ function establishmatrix(matrix) {
     const id = nextMatrixID++;
 
     const rows = matrix.length;
@@ -470,7 +470,7 @@ export function establishmatrix(matrix) {
     return id;
 }
 
-export function renderMatrix(matrixId) {
+ function renderMatrix(matrixId) {
     const matrix = matrixpostions.get(matrixId);
       const cellWidth= 40;
       const  cellHeight= 30;
@@ -570,7 +570,7 @@ function drawTravelDot(x, y) {
     ctx.fill();
 }
 
-export function drawAll() {
+ function drawAll() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // draw nodes
@@ -595,7 +595,7 @@ export function drawAll() {
 
 }
 
-export function drawNode(node) {
+ function drawNode(node) {
     if (!node || !node.visible) return; // skip drawing
 
     ctx.beginPath();
@@ -612,7 +612,7 @@ export function drawNode(node) {
     ctx.fillText(node.visual, node.x, node.y);
 }
 
-export function drawEdge(from, to,id) {
+function drawEdge(from, to,id) {
     // Draw the line
  // Save current context state
 
@@ -631,7 +631,7 @@ export function drawEdge(from, to,id) {
 
 }
 
-export function clearboard() {
+function clearboard() {
     matrixpostions.clear();
     listpostions.clear();
     nodePositions.clear();
@@ -647,7 +647,7 @@ export function clearboard() {
 
 }
 
-export function make_edge_visible(edgeid) {
+ function make_edge_visible(edgeid) {
     return new Promise(resolve => {
         const vis = edgePositions.find(e => e.id === edgeid);
         if (!vis || vis.visible) return resolve();
@@ -662,7 +662,7 @@ export function make_edge_visible(edgeid) {
     });
 }
 
-export function listSquareHighlight(listID, index) {
+ function listSquareHighlight(listID, index) {
     return new Promise(resolve => {
         const list = listpostions.get(listID);
         if (!list) return resolve();
@@ -730,7 +730,7 @@ function lerpColor(startHex, endHex, t) {
     return rgbToHex(r, g, b);
 }
 
-export function editListSquareValue(listID, index, value) {
+ function editListSquareValue(listID, index, value) {
     return new Promise(resolve => {
         const list = listpostions.get(listID);
         if (!list) return resolve();
@@ -747,7 +747,7 @@ export function editListSquareValue(listID, index, value) {
     });
 }
 
-export function highlightMatrixSquare(matrixID, row, col) {
+ function highlightMatrixSquare(matrixID, row, col) {
     return new Promise(resolve => {
         const matrix = matrixpostions.get(matrixID);
         if (!matrix) return resolve();
@@ -769,7 +769,7 @@ export function highlightMatrixSquare(matrixID, row, col) {
     });
 }
 
-export function editMatrixSquareValue(matrixID, row, col, value) {
+ function editMatrixSquareValue(matrixID, row, col, value) {
     return new Promise(resolve => {
         const matrix = matrixpostions.get(matrixID);
         if (!matrix) return resolve();
@@ -787,7 +787,7 @@ export function editMatrixSquareValue(matrixID, row, col, value) {
     });
 }
 
-export function colorNode(nodeID, hexColor) {
+ function colorNode(nodeID, hexColor) {
     return new Promise(resolve => {
         const node = nodePositions.get(nodeID);
         if (!node) return resolve();
@@ -805,13 +805,13 @@ export function colorNode(nodeID, hexColor) {
     });
 }
 
-export function pause(ms) {
+ function pause(ms) {
     return new Promise(resolve => {
         setTimeout(resolve, ms);
     });
 }
 
-export function highlightNodeInstant(nodeID) {
+ function highlightNodeInstant(nodeID) {
     return new Promise(resolve => {
         const node = nodePositions.get(nodeID);
         if (!node) return resolve();
@@ -829,7 +829,7 @@ export function highlightNodeInstant(nodeID) {
     });
 }
 
-export function disableNode(nodeID) {
+ function disableNode(nodeID) {
     return new Promise(resolve => {
         const node = nodePositions.get(nodeID);
         if (!node) return resolve();
@@ -845,7 +845,7 @@ export function disableNode(nodeID) {
     });
 }
 
-export function highlight_Edge(edgeID) {
+ function highlight_Edge(edgeID) {
     return new Promise(resolve => {
         const vis = edgePositions.find(e => e.id === edgeID);
         if (!vis) return resolve();
@@ -863,7 +863,7 @@ export function highlight_Edge(edgeID) {
     });
 }
 
-export function disableEdge(edgeID) {
+ function disableEdge(edgeID) {
     return new Promise(resolve => {
 
         const vis= edgePositions.find(e => e.id === edgeID);
@@ -882,7 +882,7 @@ export function disableEdge(edgeID) {
     });
 }
 
-export function makeEdgeInvisible(edge) {
+ function makeEdgeInvisible(edge) {
     return new Promise(resolve => {
         const vis = edgePositions.find(e => e.id === edge);
         if (!vis) return resolve();
